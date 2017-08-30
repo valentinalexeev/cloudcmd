@@ -1,11 +1,12 @@
 language: node_js
 node_js:
+    - 8
+    - 7
     - 6
-    - 5
-    - 4
 
 script:
   - npm run codestyle
+  - npm run 6to5:client:dev
   - npm run coverage && npm run report
 
 notifications:
@@ -13,4 +14,17 @@ notifications:
         on_success: never
         on_failure: change
 
-sudo: false
+sudo: required
+
+services:
+  - docker
+
+deploy:
+    provider: script
+    script: npm run docker-ci
+    skip_cleanup: true
+    on:
+        node: '8'
+        tags: true
+        all_branches: false
+

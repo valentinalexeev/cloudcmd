@@ -2,15 +2,15 @@
 
 'use strict';
 
-const   DIR         = '../';
-const   Info        = require(DIR + 'package');
+const DIR = '../';
+const Info = require(DIR + 'package');
 
-const   minor       = require('minor');
-const   place       = require('place');
-const   rendy       = require('rendy');
-const   shortdate   = require('shortdate');
+const minor = require('minor');
+const place = require('place');
+const rendy = require('rendy');
+const shortdate = require('shortdate');
 
-const   ERROR   = Error('ERROR: version is missing. release --patch|--minor|--major');
+const ERROR = Error('ERROR: version is missing. release --patch|--minor|--major');
 
 main((error) => {
     if (error)
@@ -27,50 +27,47 @@ function main(callback) {
     const version     = Info.version;
     
     cl((error, versionNew) => {
-        if (error) {
-            callback(error);
-        } else {
-            replaceVersion('README.md', version, versionNew, callback);
-            replaceVersion('HELP.md', version, versionNew, function() {
-                const historyNew = history + rendy(template, {
-                    date    : shortdate(),
-                    version : versionNew
-                });
-                
-                replaceVersion('HELP.md', history, historyNew, callback);
+        if (error)
+            return callback(error);
+        
+        replaceVersion('README.md', version, versionNew, callback);
+        replaceVersion('HELP.md', version, versionNew, function() {
+            const historyNew = history + rendy(template, {
+                date    : shortdate(),
+                version : versionNew
             });
-        }
+            
+            replaceVersion('HELP.md', history, historyNew, callback);
+        });
     });
 }
 
 function replaceVersion(name, version, versionNew, callback) {
     place(name, version, versionNew, (error) => {
-        let msg;
+        if (error)
+            return callback(error);
         
-        if (!error)
-            msg = 'done: ' + name;
-        
-        callback(error, msg);
+        callback(null,  'done: ' + name);
     });
 }
 
 function cl(callback) {
-    const argv        = process.argv;
-    const length      = argv.length - 1;
-    const last        = process.argv[length];
-    const regExp      = /^--(major|minor|patch)$/;
-    const [, match]   = last.match(regExp) || [];
-    
-    let error;
-    let versionNew;
+    const argv = process.argv;
+    const length = argv.length - 1;
+    const last = process.argv[length];
+    const regExp = /^--(major|minor|patch)$/;
+    const [, match] = last.match(regExp) || [];
     
     if (!regExp.test(last))
-        error = ERROR;
-    else if (match)
-        versionNew  = minor(match, Info.version);
-    else
-        versionNew  = last.substr(3);
+        return callback(ERROR);
     
-    callback(error, versionNew);
+    callback(null, getVersionNew(last, match));
+}
+
+function getVersionNew(last, match) {
+    if (match)
+        return minor(match, Info.version);
+    
+    return last.substr(3);
 }
 

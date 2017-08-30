@@ -1,18 +1,21 @@
-# Cloud Commander v5.6.0
+# Cloud Commander v7.3.2
 
-### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL])
+### [Main][MainURL] [Blog][BlogURL] Live(![Heroku][Heroku_LIVE_IMG] [Heroku][HerokuURL], ![Now][NOW_LIVE_IMG] [Now][NowURL]))
 
 [MainURL]:                  http://cloudcmd.io "Main"
 [BlogURL]:                  http://blog.cloudcmd.io "Blog"
-[NPM_INFO_IMG]:             https://nodei.co/npm/cloudcmd.png?downloads=true&&stars&&downloadRank "npm install cloudcmd"
 [HerokuURL]:                http://cloudcmd.herokuapp.com/ "Heroku"
+[NowURL]:                   https://cloudcmd.now.sh/ "Now"
 [HEROKU_LIVE_IMG]:          https://status-io.cloudcmd.io/host/cloudcmd.herokuapp.com/img/txt.png "Heroku"
+[NOW_LIVE_IMG]:             https://status-io.cloudcmd.io/host/cloudcmd.now.sh/img/txt.png "Now"
 
 [DWORD]:                    https://github.com/cloudcmd/dword "Editor based on CodeMirror"
 [EDWARD]:                   https://github.com/cloudcmd/edward "Editor based on Ace"
+[DEEPWORD]:                 https://github.com/cloudcmd/deepword "Editor based on Monaco"
 [EDWARD_KEYS]:              https://github.com/cloudcmd/edward/#hot-keys "Edward Hot keys"
-
-**Cloud Commander** orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
+[TERMUX]:                   https://termux.com "Termux"
+[INLY]:                     https://github.com/coderaiser/node-inly "Extract archive"
+**Cloud Commander** is an orthodox web file manager with console and editor. Will help you manage the server and work with files, directories and programs in browser from any computer, mobile or tablet.
 
 ![Cloud Commander](/img/logo/cloudcmd.png "Cloud Commander")
 
@@ -23,12 +26,14 @@ Benefits
 - Has 2 classic panels.
 - Optional **authorization**.
 - Client works in web browser.
-- Server works on **Windows**, **Linux** and **Mac OS**.
+- Server works on **Windows**, **Linux**, **Mac OS** and **Android** (with help of [Termux][TERMUX]).
 - Could be used local or remotely.
 - Adapting to screen size.
-- **2 built-in editors** with support of **syntax highlighting**: [Dword][DWORD] and [Edward][EDWARD].
+- **3 built-in editors** with support of **syntax highlighting**: [Dword][DWORD], [Edward][EDWARD] and [Deepword][DEEPWORD].
 - [Console](https://github.com/cloudcmd/console "Console") with support of default OS command line.
 - Written in **JavaScript/Node.js**.
+- Built-in archives pack: **zip** and **tar.gz**.
+- Built-in archives extract: **zip**, **tar**, **gz**, **bz2**, **.tar.gz** and **.tar.bz2** (with help of [inly][INLY]).
 
 Install
 ---------------
@@ -41,8 +46,6 @@ The installation of file manager is very simple.
 ```sh
 npm i cloudcmd -g
 ```
-
-![NPM_INFO][NPM_INFO_IMG]
 
 When in trouble use:
 
@@ -70,23 +73,35 @@ Cloud Commander supports command line parameters:
 | `-u, --username`              | set username
 | `-p, --password`              | set password
 | `-c, --config`                | configuration file path
-| `--editor`                    | set editor: "dword" or "edward"
+| `--show-config`               | show config values
+| `--editor`                    | set editor: "dword", "edward" or "deepword"
+| `--packer`                    | set packer: "tar" or "zip"
 | `--root`                      | set root directory
 | `--prefix`                    | set url prefix
 | `--port`                      | set port number
-| `--minify`                    | enable minification
 | `--progress`                  | show progress of file operations
-| `--html-dialogs`              | show html dialogs
+| `--html-dialogs`              | use html dialogs
 | `--open`                      | open web browser when server started
+| `--name`                      | set tab name in web browser
 | `--one-panel-mode`            | set one panel mode
+| `--contact`                   | enable contact
+| `--config-dialog`             | enable config dialog
+| `--console`                   | enable console
+| `--terminal`                  | enable terminal
+| `--terminal-path`             | set terminal path
 | `--no-server`                 | do not start server
 | `--no-auth`                   | disable authorization
 | `--no-online`                 | load scripts from local server
 | `--no-open`                   | do not open web browser when server started
-| `--no-minify`                 | disable minification
 | `--no-progress`               | do not show progress of file operations
 | `--no-html-dialogs`           | do not use html dialogs
 | `--no-one-panel-mode`         | unset one panel mode
+| `--no-contact`                | disable contact
+| `--no-config-dialog`          | disable config dialog
+| `--no-console`                | disable console
+| `--no-terminal`               | disable terminal
+| `--no-name`                   | set empty tab name in web browser
+
 
 If no parameters given Cloud Commander reads information from `~/.cloudcmd.json` and use
 port from it (`8000` default). if port variables `PORT` or `VCAP_APP_PORT` isn't exist.
@@ -118,6 +133,7 @@ Hot keys
 | `F3`                  | view
 | `Shift + F3`          | view as `markdown`
 | `F4`                  | edit
+| `Shift + F4`          | edit in `vim` mode
 | `F5`                  | copy
 | `F6`                  | rename/move
 | `F7`                  | new directory
@@ -136,7 +152,11 @@ Hot keys
 | `Ctrl + r`            | refresh
 | `Ctrl + d`            | clear local storage
 | `Ctrl + a`            | select all files in a panel
+| `Ctrl + m`            | rename selected files
 | `Ctrl + u`            | swap panels
+| `Ctrl + F3`           | sort by name
+| `Ctrl + F5`           | sort by date
+| `Ctrl + F6`           | sort by size
 | `Up`, `Down`, `Enter` | file system navigation
 | `Alt + Left/Right`    | show content of directory under cursor in target panel
 | `Alt + g`             | go to directory
@@ -178,6 +198,7 @@ Edit
 |Key                    |Operation
 |:----------------------|:--------------------------------------------
 | `F4`                  | open
+| `Shift + F4`          | open in `vim` mode
 | `Esc`                 | close
 
 For more details see [Edward hot keys][EDWARD_KEYS].
@@ -196,6 +217,75 @@ Console
 
 For more details see [console hot keys](https://github.com/cloudcmd/console#hot-keys "Console Hot Keys").
 
+Terminal
+---------------
+![Terminal](/img/screen/terminal.png "Terminal")
+
+### Install
+
+`Terminal` disabled and not installed by default. To use it you should install [gritty](https://github.com/cloudcmd/gritty "Gritty") with:
+
+```sh
+npm i gritty -g
+```
+
+And then set the path of a terminal with:
+
+```sh
+cloudcmd --terminal --terminal-path `gritty --path` --save
+```
+
+### Windows
+
+On Windows you need to install `windows-build-tools` first:
+
+```sh
+npm install --global windows-build-tools
+```
+
+Then get path of a `gritty` with:
+
+```sh
+gritty --path
+```
+It will returns something like:
+
+```sh
+C:\Users\coderaiser\AppData\Roaming\npm\node_modules\gritty
+```
+
+Set this path as `--terminal-path` with:
+
+```sh
+cloudcmd --save --terminal --terminal-path "C:\Users\coderaiser\AppData\Roaming\npm\node_modules\gritty"
+```
+
+After that you can use `terminal` in the same way as a `console`.
+
+### Hot keys
+
+|Key                    |Operation
+|:----------------------|:--------------------------------------------
+| `Shift` + `~`         | open
+| `Shift` + `Esc`       | close
+
+Environment Variables
+---------------
+
+Every program executed in `console` or `terminal` has these `environment` variables:
+
+- `ACTIVE_DIR` - directory that contains cursor
+- `PASSIVE_DIR` - directory with no cursor
+- `CURRENT_NAME` - name of a file under cursor
+- `CURRENT_PATH` - path to file under cursor
+
+On `Unix` you can use it this way:
+
+```sh
+~> echo $CURRENT_PATH
+/home/coderaiser/cloudcmd/bin/cloudcmd.js
+```
+
 Config
 ---------------
 ![Config](/img/screen/config.png "Config")
@@ -213,18 +303,18 @@ Here is description of options:
 
 ```js
 {
+    "name"              : "",       /* set tab name in web browser              */
     "auth"              : false,    /* enable http authentication               */
     "username"          : "root",   /* username for authentication              */
-    "password"          : "toor",   /* password hash in sha-1 for authentication*/
+    "password"          : "toor",   /* password hash for authentication         */
     "algo"              : "sha512WithRSAEncryption", /* cryptographic algorithm */
     "editor"            : "edward", /* default, could be "dword" or "edward"    */
+    "packer"            : "tar",    /* default, could be "tar" or "zip"         */
     "diff"              : true,     /* when save - send patch, not whole file   */
     "zip"               : true,     /* zip text before send / unzip before save */
-    "notifications"     : false,    /* show notifications when tab is not active*/
     "localStorage"      : true,     /* local storage                            */
     "buffer"            : true,     /* buffer for copying files                 */
     "dirStorage"        : true,     /* store directory listing to localStorage  */
-    "minify"            : false,    /* minification of js,css,html and img      */
     "online"            : true,     /* load js files from cdn or local path     */
     "open"              : false     /* open web browser when server started     */
     "cache"             : true,     /* add cache-control                        */
@@ -233,11 +323,33 @@ Here is description of options:
     "ip"                : null,     /* ip or null(default)                      */
     "root"              : "/",      /* root directory                           */
     "prefix"            : "",       /* url prefix                               */
-    "progress"          : true      /* show progress of file operations         */
-    "htmlDialogs"       : true      /* show html dialogs                        */
-    "onePanelMode"      : false     /* set one panel mode                       */
+    "progress"          : true,     /* show progress of file operations         */
+    "htmlDialogs"       : true,     /* use html dialogs                         */
+    "onePanelMode"      : false,    /* set one panel mode                       */
+    "contact"           : true,     /* enable contact                           */
+    "configDialog"      : true,     /* enable config dialog                     */
+    "console"           : true,     /* enable console                           */
+    "terminal"          : false,    /* disable terminal                         */
+    "terminalPath"      : '',       /* path of a terminal                       */
 }
 ```
+
+### Environment Variables
+
+Some config options can be overridden with `environment variables` such:
+
+- `CLOUDCMD_NAME` - set tab name in web browser
+- `CLOUDCMD_EDITOR` - set editor
+- `CLOUDCMD_CONTACT` - enable contact
+- `CLOUDCMD_CONFIG_DIALOG` - enable config dialog
+- `CLOUDCMD_CONSOLE` - enable console
+- `CLOUDCMD_TERMINAL` - enable terminal
+- `CLOUDCMD_TERMINAL_PATH` - set terminal path
+- `CLOUDCMD_AUTH` - enable authentication
+- `CLOUDCMD_USERNAME` - set username
+- `CLOUDCMD_PASSWORD` - set password
+- `CLOUDCMD_ROOT` - set root directory
+- `CLOUDCMD_ONE_PANEL_MODE` - set one panel mode
 
 Menu
 ---------------
@@ -281,32 +393,66 @@ Using as Middleware
 
 Cloud Commander could be used as middleware for `node.js` applications based on [socket.io](http://socket.io "Socket.IO") and [express](http://expressjs.com "Express"):
 
+Init `package.json`:
+
+```
+npm init -y
+```
+
+Install dependencies:
+
+```
+npm i cloudcmd express socket.io -S
+```
+
+And create `index.js`:
+
 ```js
-var http        = require('http'),
-    cloudcmd    = require('cloudcmd'),
-    express     = require('express'),
-    io          = require('socket.io'),
-    app         = express(),
-    
-    PORT        = 1337,
-    PREFIX      = '/cloudcmd',
-    server,
-    socket;
-    
-server = http.createServer(app);
-socket = io.listen(server, {
-    path: PREFIX + '/socket.io'
+const http = require('http');
+const cloudcmd = require('cloudcmd');
+const io = require('socket.io');
+const app = require('express')();
+
+const port = 1337;
+const prefix = '/cloudcmd';
+
+const server = http.createServer(app);
+const socket = io.listen(server, {
+    path: `${prefix}/socket.io`
 });
 
-app.use(cloudcmd({
-    socket: socket,     /* used by Config, Edit (optional) and Console (required)   */
-    config: {           /* config data (optional)                                   */
-        prefix: PREFIX, /* base URL or function which returns base URL (optional)   */
+const config = {
+    prefix /* base URL or function which returns base URL (optional)   */
+};
+
+const plugins = [
+    __dirname + '/plugin.js'
+];
+
+const filePicker = {
+    data: {
+        FilePicker: {
+            key: 'key'
+        }
     }
+};
+
+// override option from json/modules.json
+const modules = {
+    filePicker,
+};
+
+app.use(cloudcmd({
+    socket,  /* used by Config, Edit (optional) and Console (required)   */
+    config,  /* config data (optional)                                   */
+    plugins, /* optional */
+    modules, /* optional */
 }));
 
-server.listen(PORT);
+server.listen(port);
 ```
+
+And you are ready to go.
 
 Server
 ---------------
@@ -422,7 +568,7 @@ Docker
 `Cloud Commander` could be used as [docker container](https://hub.docker.com/r/coderaiser/cloudcmd/ "Docker container") this way:
 
 ```sh
-docker run -v ~:/root -v /:/mnt/fs -t -p 8000:8000 coderaiser/cloudcmd
+docker run -t --rm -v ~:/root -v /:/mnt/fs -p 8000:8000 coderaiser/cloudcmd
 ```
 
 Config would be read from home directory, hosts root file system would be mount to `/mnt/fs`,
@@ -448,8 +594,96 @@ When you create this file run:
 docker-compose up
 ```
 
+Get involved
+---------------
+
+There is a lot ways to be involved in `Cloud Commander` development:
+
+- if you find a bug or got idea to share [create issue](https://github.com/coderaiser/cloudcmd/issues/new "Create issue");
+- if you fixed a bug, typo or implemented new feature [create pull request](https://github.com/coderaiser/cloudcmd/compare "Create pull request");
+- if you know languages you can help with [site translations](https://github.com/coderaiser/cloudcmd/wiki "Cloud Commander community wiki");
+
 Version history
 ---------------
+- *2017.08.29*, **[v7.3.2](//github.com/coderaiser/cloudcmd/releases/tag/v7.3.2)**
+- *2017.08.14*, **[v7.3.1](//github.com/coderaiser/cloudcmd/releases/tag/v7.3.1)**
+- *2017.08.14*, **[v7.3.0](//github.com/coderaiser/cloudcmd/releases/tag/v7.3.0)**
+- *2017.08.11*, **[v7.2.2](//github.com/coderaiser/cloudcmd/releases/tag/v7.2.2)**
+- *2017.07.31*, **[v7.2.1](//github.com/coderaiser/cloudcmd/releases/tag/v7.2.1)**
+- *2017.07.28*, **[v7.2.0](//github.com/coderaiser/cloudcmd/releases/tag/v7.2.0)**
+- *2017.07.27*, **[v7.1.1](//github.com/coderaiser/cloudcmd/releases/tag/v7.1.1)**
+- *2017.07.27*, **[v7.1.0](//github.com/coderaiser/cloudcmd/releases/tag/v7.1.0)**
+- *2017.07.14*, **[v7.0.2](//github.com/coderaiser/cloudcmd/releases/tag/v7.0.2)**
+- *2017.07.12*, **[v7.0.1](//github.com/coderaiser/cloudcmd/releases/tag/v7.0.1)**
+- *2017.07.12*, **[v7.0.0](//github.com/coderaiser/cloudcmd/releases/tag/v7.0.0)**
+- *2017.07.14*, **[v6.15.5](//github.com/coderaiser/cloudcmd/releases/tag/v6.15.5)**
+- *2017.07.10*, **[v6.15.4](//github.com/coderaiser/cloudcmd/releases/tag/v6.15.4)**
+- *2017.06.26*, **[v6.15.3](//github.com/coderaiser/cloudcmd/releases/tag/v6.15.3)**
+- *2017.06.22*, **[v6.15.2](//github.com/coderaiser/cloudcmd/releases/tag/v6.15.2)**
+- *2017.06.14*, **[v6.15.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.15.1)**
+- *2017.06.06*, **[v6.15.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.15.0)**
+- *2017.05.25*, **[v6.14.4](//github.com/coderaiser/cloudcmd/releases/tag/v6.14.4)**
+- *2017.05.22*, **[v6.14.3](//github.com/coderaiser/cloudcmd/releases/tag/v6.14.3)**
+- *2017.05.18*, **[v6.14.2](//github.com/coderaiser/cloudcmd/releases/tag/v6.14.2)**
+- *2017.05.18*, **[v6.14.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.14.1)**
+- *2017.05.17*, **[v6.14.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.14.0)**
+- *2017.05.15*, **[v6.13.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.13.0)**
+- *2017.05.12*, **[v6.12.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.12.0)**
+- *2017.05.10*, **[v6.11.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.11.0)**
+- *2017.04.25*, **[v6.10.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.10.1)**
+- *2017.04.24*, **[v6.10.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.10.0)**
+- *2017.04.18*, **[v6.9.3](//github.com/coderaiser/cloudcmd/releases/tag/v6.9.3)**
+- *2017.04.13*, **[v6.9.2](//github.com/coderaiser/cloudcmd/releases/tag/v6.9.2)**
+- *2017.04.12*, **[v6.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.9.1)**
+- *2017.03.23*, **[v6.9.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.9.0)**
+- *2017.03.21*, **[v6.8.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.8.1)**
+- *2017.03.06*, **[v6.8.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.8.0)**
+- *2017.03.04*, **[v6.7.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.7.0)**
+- *2017.02.24*, **[v6.6.3](//github.com/coderaiser/cloudcmd/releases/tag/v6.6.3)**
+- *2017.02.24*, **[v6.6.2](//github.com/coderaiser/cloudcmd/releases/tag/v6.6.2)**
+- *2017.02.24*, **[v6.6.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.6.1)**
+- *2017.02.22*, **[v6.6.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.6.0)**
+- *2017.02.21*, **[v6.5.6](//github.com/coderaiser/cloudcmd/releases/tag/v6.5.6)**
+- *2017.02.21*, **[v6.5.5](//github.com/coderaiser/cloudcmd/releases/tag/v6.5.5)**
+- *2017.02.17*, **[v6.5.4](//github.com/coderaiser/cloudcmd/releases/tag/v6.5.4)**
+- *2017.02.17*, **[v6.5.3](//github.com/coderaiser/cloudcmd/releases/tag/v6.5.3)**
+- *2017.02.15*, **[v6.5.2](//github.com/coderaiser/cloudcmd/releases/tag/v6.5.2)**
+- *2017.02.14*, **[v6.5.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.5.1)**
+- *2017.02.14*, **[v6.5.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.5.0)**
+- *2017.02.06*, **[v6.4.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.4.0)**
+- *2017.02.02*, **[v6.3.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.3.1)**
+- *2017.01.27*, **[v6.3.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.3.0)**
+- *2017.01.26*, **[v6.2.2](//github.com/coderaiser/cloudcmd/releases/tag/v6.2.2)**
+- *2017.01.24*, **[v6.2.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.2.1)**
+- *2017.01.24*, **[v6.2.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.2.0)**
+- *2017.01.20*, **[v6.1.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.1.0)**
+- *2017.01.17*, **[v6.0.3](//github.com/coderaiser/cloudcmd/releases/tag/v6.0.3)**
+- *2017.01.08*, **[v6.0.2](//github.com/coderaiser/cloudcmd/releases/tag/v6.0.2)**
+- *2017.01.06*, **[v6.0.1](//github.com/coderaiser/cloudcmd/releases/tag/v6.0.1)**
+- *2016.12.29*, **[v6.0.0](//github.com/coderaiser/cloudcmd/releases/tag/v6.0.0)**
+- *2016.12.27*, **[v5.13.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.13.0)**
+- *2016.12.23*, **[v5.12.4](//github.com/coderaiser/cloudcmd/releases/tag/v5.12.4)**
+- *2016.12.23*, **[v5.12.3](//github.com/coderaiser/cloudcmd/releases/tag/v5.12.3)**
+- *2016.12.19*, **[v5.12.2](//github.com/coderaiser/cloudcmd/releases/tag/v5.12.2)**
+- *2016.12.19*, **[v5.12.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.12.1)**
+- *2016.12.16*, **[v5.12.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.12.0)**
+- *2016.12.05*, **[v5.11.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.11.1)**
+- *2016.12.01*, **[v5.10.2](//github.com/coderaiser/cloudcmd/releases/tag/v5.11.0)**
+- *2016.12.01*, **[v5.10.2](//github.com/coderaiser/cloudcmd/releases/tag/v5.10.2)**
+- *2016.11.22*, **[v5.10.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.10.1)**
+- *2016.11.18*, **[v5.10.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.10.0)**
+- *2016.11.10*, **[v5.9.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.9.1)**
+- *2016.11.10*, **[v5.9.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.9.0)**
+- *2016.11.09*, **[v5.8.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.8.0)**
+- *2016.11.06*, **[v5.7.6](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.6)**
+- *2016.11.06*, **[v5.7.5](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.5)**
+- *2016.10.27*, **[v5.7.4](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.4)**
+- *2016.10.27*, **[v5.7.3](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.3)**
+- *2016.10.24*, **[v5.7.2](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.2)**
+- *2016.10.24*, **[v5.7.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.1)**
+- *2016.10.18*, **[v5.7.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.7.0)**
+- *2016.09.22*, **[v5.6.2](//github.com/coderaiser/cloudcmd/releases/tag/v5.6.2)**
+- *2016.09.06*, **[v5.6.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.6.1)**
 - *2016.07.19*, **[v5.6.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.6.0)**
 - *2016.06.29*, **[v5.5.1](//github.com/coderaiser/cloudcmd/releases/tag/v5.5.1)**
 - *2016.06.15*, **[v5.5.0](//github.com/coderaiser/cloudcmd/releases/tag/v5.5.0)**
@@ -592,7 +826,7 @@ Version history
 
 Special Thanks
 ---------------
-- [Polietilena](http://polietilena.github.io/ "Polietilena") for **logo** and **favicon**.
+- [Olena Zalitok](https://zalitok.github.io/ "Olena Zalitok") for **logo** and **favicon**.
 - [TarZak](https://github.com/tarzak "TarZak")
     - Russian and Ukrainian translations;
     - config template and style;

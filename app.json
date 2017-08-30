@@ -10,5 +10,72 @@
     "file manager",
     "folder",
     "orthodox"
-  ]
+  ],
+  "env": {
+      "NPM_CONFIG_PRODUCTION": {
+          "description": "Keep false to install devDependencies and build frontend",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_EDITOR": {
+          "description": "set editor",
+          "value": "edward",
+          "required": false
+      },
+      "CLOUDCMD_CONTACT": {
+          "description": "enable contact",
+          "value": "true",
+          "required": false
+      },
+      "CLOUDCMD_CONFIG_DIALOG": {
+          "description": "show config dialog",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_CONSOLE": {
+          "description": "enable console",
+          "value": "true",
+          "required": false
+      },
+      "CLOUDCMD_TERMINAL": {
+          "description": "enable terminal",
+          "value": "true",
+          "required": false
+      },
+      "CLOUDCMD_TERMINAL_PATH": {
+          "description": "set terminal path",
+          "value": "gritty",
+          "required": false
+      },
+      "CLOUDCMD_NAME": {
+          "description": "set tab name in web browser",
+          "value": "",
+          "required": false
+      },
+      "CLOUDCMD_AUTH": {
+          "description": "enable authorization",
+          "value": "false",
+          "required": false
+      },
+      "CLOUDCMD_USERNAME": {
+          "description": "set username",
+          "value": "root",
+          "required": false
+      },
+      "CLOUDCMD_PASSWORD": {
+          "description": "set password",
+          "value": "toor",
+          "required": false
+      },
+      "CLOUDCMD_ROOT": {
+          "description": "set root dir",
+          "value": "",
+          "required": false
+      },
+      "CLOUDCMD_ONE_PANEL_MODE": {
+          "description": "set one panel mode",
+          "value": "false",
+          "required": false
+      }
+  }
 }

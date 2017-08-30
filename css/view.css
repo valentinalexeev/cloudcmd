@@ -1,6 +1,7 @@
 .view {
     font-size: 16px;
     white-space: pre;
+    height: 100%;
 }
 
 .view:focus {
@@ -14,7 +15,6 @@
 
 .view-overlay {
     display     : block;
-    background  : rgb(255, 255, 255);
     background  : rgba(255, 255, 255, 0.1);
 }
 

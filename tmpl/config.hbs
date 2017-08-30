@@ -45,16 +45,8 @@
         <select data-name="js-editor" class="form-control full-width" title="Editor">
             <option {{ edward-selected }}>edward</option>
             <option {{ dword-selected }}>dword</option>
+            <option {{ deepword-selected }}>deepword</option>
         </select>
-    </li>
-    <li>
-        <label>
-            <input
-                data-name="js-notifications"
-                type="checkbox"
-                {{ notifications }}>
-            Notifications
-        </label>
     </li>
     <li>
         <label>
@@ -80,15 +72,15 @@
     </li>
     <li>
         <label>
-            <input data-name="js-minify" type="checkbox" {{ minify }}>
-            Minify
-        </label>
-    </li>
-    <li>
-        <label>
             <input data-name="js-online" type="checkbox" {{ online }}>
             Online
         </label>
+    </li>
+    <li>
+        <select data-name="js-packer" class="form-control full-width" title="Packer">
+            <option {{ tar-selected }}>tar</option>
+            <option {{ zip-selected }}>zip</option>
+        </select>
     </li>
     <li>
         <label>
@@ -103,7 +95,15 @@
         </label>
     </li>
      <li>
-        <input 
+        <input
+            data-name="js-name"
+            title="Name"
+            value="{{ name }}"
+            placeholder="name"
+            class="form-control">
+    </li>
+     <li>
+        <input
             data-name="js-root"
             title="Root"
             value="{{ root }}"

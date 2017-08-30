@@ -1,5 +1,6 @@
 {
     "env": {
+        "es6": true,
         "node": true,
         "browser": true
     },
@@ -7,5 +8,12 @@
         "ecmaVersion": 6,
         "sourceType": "module"
     },
-  "extends": ["eslint:recommended"]
+    "rules": {
+        "indent": ["error", 4],
+        "semi": "error",
+        "no-use-before-define": ["error", "nofunc"]
+    },
+    "extends": [
+        "eslint:recommended"
+    ]
 }

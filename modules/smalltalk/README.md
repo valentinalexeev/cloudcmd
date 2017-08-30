@@ -1,5 +1,4 @@
-Smalltalk [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL]
-====
+# Smalltalk [![License][LicenseIMGURL]][LicenseURL] [![NPM version][NPMIMGURL]][NPMURL] [![Dependency Status][DependencyStatusIMGURL]][DependencyStatusURL] [![Build Status][BuildStatusIMGURL]][BuildStatusURL] [![Coverage][CoverageIMGURL]][CoverageURL]
 
 Simple [Promise](https://developer.mozilla.org/en/docs/Web/JavaScript/Reference/Global_Objects/Promise)-based replacement of native Alert, Confirm and Prompt.
 
@@ -61,7 +60,15 @@ smalltalk.prompt('Question', 'How old are you?', '10').then(function(value) {
 });
 ```
 
-#License
+## Bundlers
+
+When `webpack` `rollup` or `browserify` used, you can import `es5` version with:
+
+```js
+import smalltalk from 'smalltalk/legacy';
+```
+
+# License
 MIT
 
 [NPMIMGURL]:                https://img.shields.io/npm/v/smalltalk.svg?style=flat
@@ -72,4 +79,7 @@ MIT
 [BuildStatusURL]:           https://travis-ci.org/coderaiser/smalltalk  "Build Status"
 [DependencyStatusURL]:      https://gemnasium.com/coderaiser/smalltalk "Dependency Status"
 [LicenseURL]:               https://tldrlegal.com/license/mit-license "MIT License"
+
+[CoverageURL]:              https://coveralls.io/github/coderaiser/smalltalk?branch=master
+[CoverageIMGURL]:           https://coveralls.io/repos/coderaiser/smalltalk/badge.svg?branch=master&service=github
 

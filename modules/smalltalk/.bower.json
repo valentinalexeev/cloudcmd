@@ -21,18 +21,19 @@
     "**/.*",
     "screen",
     "example",
-    "test"
+    "test",
+    "webpack.config.js"
   ],
   "dependencies": {},
-  "version": "2.1.2",
-  "_release": "2.1.2",
+  "version": "2.4.1",
+  "_release": "2.4.1",
   "_resolution": {
     "type": "version",
-    "tag": "v2.1.2",
-    "commit": "3347d250e0e5da3b1aa7afcf2b9b3a50d9a48064"
+    "tag": "v2.4.1",
+    "commit": "1c993e63d5228568515378487ef44069cce55911"
   },
   "_source": "https://github.com/coderaiser/smalltalk.git",
-  "_target": "^2.1.2",
+  "_target": "^2.4.1",
   "_originalSource": "smalltalk",
   "_direct": true
 }

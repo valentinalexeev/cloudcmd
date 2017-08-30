@@ -1,14 +1,35 @@
 .*
 manifest.yml
-cercle.yml
 Dockerfile*
 docker-compose.yml
 shell
 test
+coverage
+css
+html
+yarn-error.log
+now.json
+
+modules/jquery/dist
+modules/jquery/external
+modules/jquery/src
+
+!modules/jquery/dist/jquery.min.js
+
+modules/fancybox/lib/
+modules/fancybox/demo
+modules/fancybox/sprite.psd
+
+modules/execon
+modules/emitify
 
 app.json
-circle.yml
+bower.json
+manifest.yml
 
 bin/release.js
-legacy
+
+client
+
+webpack.config.js
 
