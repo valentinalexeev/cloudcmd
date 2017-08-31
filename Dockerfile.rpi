@@ -6,10 +6,25 @@ RUN mkdir -p /usr/src/app
 WORKDIR /usr/src/app
 
 COPY package.json /usr/src/app/
-RUN npm install --production
+
+RUN apt-get update && apt-get install python2.7 python2.7-dev make g++
+
+ENV PYTHON python2.7
+
+RUN npm config set package-lock false && \
+    npm install && \
+    npm i gritty && \
+    npm cache clean --force
+
 COPY . /usr/src/app
+
+RUN node_modules/.bin/webpack --progress
+
+WORKDIR /root
+
+ENV cloudcmd_terminal=false cloudcmd_terminal_path=gritty cloudcmd_auth=true cloudcmd_username=admin cloudcmd_password=admin
 
 EXPOSE 8000
 
-ENTRYPOINT ["bin/cloudcmd.js"]
+ENTRYPOINT ["/usr/src/app/bin/cloudcmd.js"]
 
